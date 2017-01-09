@@ -8,6 +8,7 @@
 	* Thymeleaf Template Engine
 	* Css Bootstrap
 	* MySQL
+	* Font Awesome
 
 ## Langkah Menjalankan Project
 	1. Buat database MySQL
@@ -26,6 +27,8 @@
 			mvn clean package spring-boot:run
 		```````	
 		* aplikasi siap di browse di localhost:8080/index
+		* username : agung
+		* password : 123
 
 	4. Fitur Aplikasi
 
