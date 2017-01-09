@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--
+ penjualan.java
+ Aplikasi-Penjualan-Web 
+
+ Created by Agung Pramono on 31/10/2016 
+ Copyright (c) 2016 Java Development. All rights reserved.
+-->
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <head>
+        <title>Form Transaksi</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <h1 class="page-header" th:text='#{penjualan.form}'>Edit Produk</h1>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <a th:href="@{/transaksi/list}"><button class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i> Kembali</button></a>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Form Transaksi Penjualan
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form class="form-horizontal" method="post" th:object="${transaksi}">
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('kodeTransaksi')} ? 'has-error'">
+                                            <label for="kodeTransaksi" class="col-sm-2 control-label">Kode Transaksi</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" 
+                                                       th:field="*{kodeTransaksi}"
+                                                       class="form-control" id="kodeTransaksi" placeholder="kode Transaksi" />
+                                                <label class="control-label" 
+                                                       th:errors="*{kodeTransaksi}">
+                                                    Pesan error nanti di sini
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('tanggalTransaksi')} ? 'has-error'">
+                                            <label for="tanggalTransaksi" class="col-sm-2 control-label">Nama produk</label>
+                                            <div class="col-sm-10">
+                                                <input type="text"
+                                                       th:field="*{tanggalTransaksi}"
+                                                       class="form-control" id="tanggalTransaksi" placeholder="Tanggal Transaksi" />
+                                                <label class="control-label" 
+                                                       th:errors="*{tanggalTransaksi}">
+                                                    Pesan error nanti di sini
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-default">Simpan</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Produk</h3>
+
+            <button class="btn btn-primary" data-toggle="modal" data-target="#tambahProduk">Tambah Produk</button>
+
+            <table class="table table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th>Kode Produk</th>
+                        <th>Nama Produk</th>
+                        <th>Harga Produk</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="produk : ${daftarProduk}">
+                        <td th:text="${produk.kodeProduk}">P-001</td>
+                        <td th:text="${produk.namaProduk}">Teh Botol</td>
+                        <td th:text="${produk.jumlahProduk}">20</td>
+                        <td th:text="${produk.harga}">4.000</td>
+                        <td>
+                            <a th:href="@{/transaksi/formtrx(id=${transaksi.id},id_produk=${produk.id},action=remove)}" class="btn btn-xs" th:if="${transaksi}">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                            <a th:href="@{/transaksi/formtrx(id_produk=${produk.id},action=remove)}" class="btn btn-xs" th:unless="${transaksi}">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+            <!-- Dialog Tambah Produk -->
+            <div class="modal fade" id="tambahProduk" tabindex="-1" role="dialog" aria-labelledby="tambahProdukLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="tambahProdukLabel">Tambah Produk</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Kode Produk</th>
+                                            <th>Nama Produk</th>
+                                            <th>Jumlah</th>
+                                            <th>Harga</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="produk : ${pilihanProduk}">
+                                            <td th:text="${produk.kodeProduk}">P-001</td>
+                                            <td th:text="${produk.namaProduk}">Teh Botol</td>
+                                            <td th:text="${produk.jumlahProduk}">20</td>
+                                            <td th:text="${produk.harga}">4.000</td>
+                                            <td>
+                                                <a th:href="@{/transaksi/formtrx(id=${transaksi.id},id_produk=${produk.id},action=add)}" class="btn btn-xs" th:if="${transaksi}">
+                                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                </a>
+                                                <a th:href="@{/transaksi/formtrx(id_produk=${transaksi.id},action=add)}" class="btn btn-xs" th:unless="${transaksi}">
+                                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

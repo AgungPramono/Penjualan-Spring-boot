@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+ distributor_form.java
+ Aplikasi-Penjualan-Web 
+
+ Created by Agung Pramono on 31/10/2016 
+ Copyright (c) 2016 Java Development. All rights reserved.
+-->
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <head>
+        <title>Penjualan|Form Distributor</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <h1 class="page-header" th:text='#{distributor.form}'>Edit Distributor</h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Update/Add Distributor Baru
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form class="form-horizontal" method="post" th:object="${distributor}">
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('kodeDistributor')} ? 'has-error'">
+                                            <label for="kodeDistributor" class="col-sm-2 control-label">Kode Distributor</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" 
+                                                       th:field="*{kodeDistributor}"
+                                                       class="form-control" id="kodeDistributor" placeholder="Kode Distributor" />
+                                                <label class="control-label" 
+                                                       th:errors="*{kodeDistributor}">
+                                                    Pesan error nanti di sini
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('namaDistributor')} ? 'has-error'">
+                                            <label for="namaDistributor" class="col-sm-2 control-label">Nama Distributor</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" 
+                                                       th:field="*{namaDistributor}"
+                                                       class="form-control" id="namaDistributor" placeholder="Nama Distributor" />
+                                                <label class="control-label" 
+                                                       th:errors="*{namaDistributor}">
+                                                    Pesan error nanti di sini
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('alamatDistributor')} ? 'has-error'">
+                                            <label for="alamatDistributor" class="col-sm-2 control-label">Jumlah produk</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" 
+                                                       th:field="*{alamatDistributor}"
+                                                       class="form-control" id="alamatDistributor" placeholder="Alamat Distributor" />
+                                                <label class="control-label" 
+                                                       th:errors="*{alamatDistributor}">
+                                                    Pesan error nanti di sini
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-default">Simpan</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:href="@{/distributor/list}"><button class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i> Kembali</button></a>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

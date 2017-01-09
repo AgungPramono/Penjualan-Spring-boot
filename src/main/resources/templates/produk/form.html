@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <head>
+        <title>Penjualan|Edit Produk</title>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <h1 class="page-header" th:text='#{produk.form}'>Edit Produk</h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Update/Add Produk Baru
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form class="form-horizontal" method="post" th:object="${produk}">
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('kodeProduk')} ? 'has-error'">
+                                            <label for="kodeProduk" class="col-sm-2 control-label">Kode Produk</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" 
+                                                       th:field="*{kodeProduk}"
+                                                       class="form-control" id="kodeProduk" placeholder="Kode Produk" />
+                                                <label class="control-label" 
+                                                       th:errors="*{kodeProduk}">
+                                                    Pesan error nanti di sini
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('namaProduk')} ? 'has-error'">
+                                            <label for="namaProduk" class="col-sm-2 control-label">Nama produk</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" 
+                                                       th:field="*{namaProduk}"
+                                                       class="form-control" id="namaProduk" placeholder="Nama Produk" />
+                                                <label class="control-label" 
+                                                       th:errors="*{namaProduk}">
+                                                    Pesan error nanti di sini
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('jumlahProduk')} ? 'has-error'">
+                                            <label for="jumlahProduk" class="col-sm-2 control-label">Jumlah produk</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" 
+                                                       th:field="*{jumlahProduk}"
+                                                       class="form-control" id="jumlahProduk" placeholder="Jumlah Produk" />
+                                                <label class="control-label" 
+                                                       th:errors="*{jumlahProduk}">
+                                                    Pesan error nanti di sini
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('harga')} ? 'has-error'">
+                                            <label for="harga" class="col-sm-2 control-label">Harga</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" 
+                                                       th:field="*{harga}"
+                                                       class="form-control" id="harga" placeholder="80xxx" />
+                                                <label class="control-label" 
+                                                       th:errors="*{harga}">
+                                                    Pesan error nanti di sini
+                                                </label>
+                                            </div>
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-default">Simpan</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:href="@{/produk/list}"><button class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i> Kembali</button></a>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
