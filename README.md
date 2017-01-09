@@ -4,11 +4,11 @@
 	* SpringBoot
 	* Spring Data JPA
 	* Hibernate
-	* AngularJS
 	* Thymeleaf Template Engine
 	* Css Bootstrap
 	* MySQL
 	* Font Awesome
+	* Template Admin
 
 ## Langkah Menjalankan Project
 	1. Buat database MySQL
