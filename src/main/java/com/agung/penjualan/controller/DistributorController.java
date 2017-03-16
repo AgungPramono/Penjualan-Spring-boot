@@ -1,8 +1,8 @@
 //
 // DistributorController.java
-// Aplikasi-Penjualan-Web 
+// Aplikasi-Penjualan-Web
 //
-// Created by Agung Pramono on 30/10/2016 
+// Created by Agung Pramono on 30/10/2016
 // Copyright (c) 2016 Java Development. All rights reserved.
 //
 
@@ -23,21 +23,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- *
+ * Created by Agung Pramono
  */
 @Controller
 @RequestMapping("/distributor")
 public class DistributorController {
-    
+
     @Autowired
     private DistributorDao dd;
-    
+
     @RequestMapping("list")
     public void daftarProduk(ModelMap mm,Pageable page){
         Page<Distributor> result = dd.findAll(page);
         mm.addAttribute("daftarDistributor", result);
     }
-    
+
     @RequestMapping(value = "form", method = RequestMethod.GET)
     public void tampilkanFormDistributor(@RequestParam(required = false, name = "id")Distributor distributor, ModelMap mm){
         if (distributor != null) {
@@ -46,17 +46,17 @@ public class DistributorController {
             mm.addAttribute("distributor", new Distributor());
         }
     }
-    
+
     @RequestMapping(value = "form", method = RequestMethod.POST)
     public String prosesFormDistributor(@ModelAttribute @Valid Distributor distributor,BindingResult hasilValidasi){
         if (hasilValidasi.hasErrors()) {
             return "/distributor/form";
         }
-        
+
         dd.save(distributor);
         return "redirect:list";
     }
-    
+
     @RequestMapping(value = "/hapus", method = RequestMethod.DELETE)
     public String hapusDistributor(@RequestParam(required = true, value = "id")String id){
         if (id != null) {

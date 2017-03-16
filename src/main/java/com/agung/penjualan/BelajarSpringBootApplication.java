@@ -9,14 +9,14 @@ import org.thymeleaf.dialect.springdata.SpringDataDialect;
 
 @EntityScan(
         basePackageClasses = {BelajarSpringBootApplication.class, Jsr310JpaConverters.class}
-)
+        )
 @SpringBootApplication
 public class BelajarSpringBootApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BelajarSpringBootApplication.class, args);
 	}
-        
+
          @Bean
     public SpringDataDialect springDataDialect() {
         return new SpringDataDialect();
